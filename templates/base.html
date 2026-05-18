@@ -1,0 +1,24 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Base{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+        <img class="logo" src="{% static 'images/odclogo3.png' %}" alt="Logo">
+        <h1>OCD Checklist Solution</h1>
+    </header>
+
+    <footer>
+        A checklist for those dreadful repetitive tasks. Did you lock the door? Yes, you checked it today at 12:47. Physical proof it happened :)
+    </footer>
+</body>
+</html>
