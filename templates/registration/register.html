@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <h1>Register</h1>
+    <form method="post">
+        {% csrf_token %}
+            {% for field in form %}
+            <div class="form-field">
+                <label for="{{ field.id_for_label }}">
+                    {% if field.help_text %}
+                        <span class="tooltip-icon">
+                            <i class="fa-solid fa-circle-info"></i>
+                        </span>
+                    {% endif %}
+                    {{ field.label }}:
+                </label>
+                {{ field }}
+                {% if field.help_text %}
+                    <div class="tooltip">{{ field.help_text }}</div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+</div>
+{% endblock %}
