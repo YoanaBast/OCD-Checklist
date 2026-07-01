@@ -3,6 +3,73 @@
 {% block title %}Tasks Dashboard{% endblock %}
 
 {% block content %}
-<h1>Your Tasks</h1>
-<p>Welcome back</p>
+
+<div class="dashboard">
+
+    <div class="dashb-top">
+            <h1>Tasks Dashboard</h1>
+
+            <a href="{% url 'profile' %}" class="add">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>Manage</span>
+            </a>
+    </div>
+
+    {% if trackers %}
+        {% for tracker in trackers %}
+
+            <div class="item">
+                <div>
+                    <h2>{{ tracker.task.name }}</h2>
+
+                    {% if tracker.notes %}
+                        <p>Last notes: {{ tracker.notes }}</p>
+                    {% endif %}
+
+                </div>
+
+                <div>
+                    <h3>
+                        Last done:
+                        <span>
+                            {% if tracker.last_completed %}
+                                {{ tracker.last_completed|date:"M d, Y H:i" }}
+                            {% else %}
+                                Never
+                            {% endif %}
+                        </span>
+                    </h3>
+
+
+                    <form id="complete-{{ tracker.id }}"
+                          class="complete-form hidden"
+                          method="post"
+                          action="{% url 'complete_task' tracker.id %}">
+                        {% csrf_token %}
+
+                        <input
+                            type="text"
+                            name="notes"
+                            placeholder="Optional notes..."
+                            maxlength="50">
+
+                        <button type="submit">Do it Now</button>
+                        <button type="button"
+                                onclick="document.getElementById('complete-{{ tracker.id }}').classList.add('hidden')">
+                            Cancel
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+     {% endfor %}
+    {% else %}
+        <div class="notask">
+            <p>You don't have any tasks yet.</p>
+        </div>
+    {% endif %}
+
+</div>
+
+
 {% endblock %}

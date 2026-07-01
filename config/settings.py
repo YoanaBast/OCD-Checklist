@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv(BASE_DIR / ".env")
+load_dotenv(BASE_DIR / ".env", override=True)
 
 
 # Quick-start development settings - unsuitable for production
@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'user_tasks'
+
+    'user_tasks',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -89,6 +91,16 @@ DATABASES = {
     }
 }
 
+# print(DATABASES)
+
+#DB FIX for pycharm
+# print(DATABASES)
+# Remove-Item Env:DB_NAME -ErrorAction SilentlyContinue
+# Remove-Item Env:DB_USER -ErrorAction SilentlyContinue
+# Remove-Item Env:DB_PASSWORD -ErrorAction SilentlyContinue
+# Remove-Item Env:DB_HOST -ErrorAction SilentlyContinue
+# Remove-Item Env:DB_PORT -ErrorAction SilentlyContinue
+
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -129,3 +141,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = 'login'
