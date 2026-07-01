@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect
 
 
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 
 
@@ -18,5 +17,3 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
 
-
-# @login_required
