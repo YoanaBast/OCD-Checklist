@@ -74,3 +74,13 @@
 
 
 </html>
+
+<script>
+(function() {
+    if (!document.cookie.includes('user_timezone=')) {
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        document.cookie = `user_timezone=${tz}; path=/; max-age=31536000`;
+        location.reload(); // reload once so the server can read the cookie immediately
+    }
+})();
+</script>

@@ -1,4 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
+from django.db import IntegrityError
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
@@ -37,21 +39,26 @@ def profile(request):
 
 @login_required
 def add_task(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = TaskForm(request.POST)
+
         if form.is_valid():
+            name = form.cleaned_data['name']
 
-            task = form.save(commit=False)
-            task.user = request.user
-            task.save()
+            if Task.objects.filter(user=request.user, name__iexact=name).exists():
+                form.add_error('name', 'You already have a task with this name.')
+            else:
+                task = form.save(commit=False)
+                task.user = request.user
+                task.save()
+                return redirect("dashboard")
 
-            UserTaskTracker.objects.create(task=task)
-
-            return redirect("profile")
     else:
         form = TaskForm()
 
-    return render(request, 'user_tasks/add_task.html', {'form': form})
+    return render(request, "user_tasks/add_task.html", {"form": form})
+
+
 
 
 @login_required

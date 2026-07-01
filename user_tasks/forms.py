@@ -7,7 +7,14 @@ class TaskForm(forms.ModelForm):
         model = Task
         fields = ['name', 'description']
 
+    def clean_name(self):
+        name = self.cleaned_data["name"]
+        user = self.initial.get("user")
 
+        if Task.objects.filter(user=user, name=name).exists():
+            raise forms.ValidationError("You already have a task with this name.")
+
+        return name
 
 class CompleteTaskForm(forms.ModelForm):
     class Meta:
