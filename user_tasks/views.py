@@ -51,13 +51,16 @@ def add_task(request):
                 task = form.save(commit=False)
                 task.user = request.user
                 task.save()
+
+                # create the tracker so it shows up on dashboard/profile
+                UserTaskTracker.objects.create(task=task)
+
                 return redirect("dashboard")
 
     else:
         form = TaskForm()
 
     return render(request, "user_tasks/add_task.html", {"form": form})
-
 
 
 
