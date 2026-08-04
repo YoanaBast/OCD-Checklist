@@ -10,6 +10,15 @@ A checklist for those dreadful repetitive tasks. Did you lock the door? Yes — 
 
 OCD Checklist is a small web app for logging routine safety checks (locking the door, turning off the stove, etc.) so you have a timestamped record you can look back on instead of relying on memory. It's built to give a quick, reassuring answer to "did I actually do that?"
 
+ 
+<table align="center">
+  <tr>
+    <td align="center"><img src="docs/desktop.png" alt="Desktop view" height="400"></td>
+    <td align="center"><img src="docs/mobile.png" alt="Mobile view" height="400"></td>
+  </tr>
+</table>
+
+
 ## Features
 
 - User accounts (register / log in / log out)
